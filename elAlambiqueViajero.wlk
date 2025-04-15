@@ -1,4 +1,3 @@
-import bolichito-julieta-rios.objetos.*
 object luke{
     var cantidadViajes = 0
     var recuerdo = null
