@@ -3,12 +3,10 @@ test "luke cuenta cuando va de viaje"{
     luke.viajar(paris)
     assert.equals(1, luke.cantidadViajes())
 }
-
 test "luke viaja a paris"{
     luke.viajar(paris)
     assert.equals("Llavero Torre Eiffel", luke.recuerdo())
 }
-
 
 test "luke viaja a bs as"{
     luke.viajar(buenosAires)
@@ -51,4 +49,12 @@ test "luke viaja 2 veces, quiere viajar a Paris y no puede"{
     luke.viajar(buenosAires)
     luke.viajar(paris)
     assert.notEquals("Llavero Torre Eiffel",luke.recuerdo())
+}
+
+test "luke viaja a grecia en el convertible convertido en chatarra"{
+    luke.vehiculo(superConvertible)
+    superConvertible.convertir(chatarra)
+    luke.viajar(grecia)
+    assert.equals("Ceramica", luke.recuerdo())
+    //assert.equals(5,chatarra.cañones())
 }

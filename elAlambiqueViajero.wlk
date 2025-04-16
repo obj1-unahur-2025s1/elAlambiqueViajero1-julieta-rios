@@ -21,52 +21,57 @@ object alambiqueVeloz {
     var rapido = true
     var combustible = 20
     const consumoPorViaje = 10
+    var patente = "AB123JK"
+    //method combustible() = combustible
+    //method consumoPorViaje() = consumoPorViaje
     method tieneCombustible() = combustible >= consumoPorViaje
     method consumirCombustible() {
         combustible = combustible - consumoPorViaje
     }
     method rapido() = rapido
+    method patenteValida() = patente.head() == "A"
 }
 
 object antiguallaBlindada {
-    var rapido = gangster <= 3
-    var combustible = 30
-    var consumoPorViaje = 7 * gangster
-    var gangster = 2
-
-    method tieneCombustible() = combustible >= consumoPorViaje
-    method rapido() = rapido
-    method combustible() = combustible
-    method consumoPorViaje() = consumoPorViaje
-
+    var gangster = 7
+    method rapido() = gangster > 6
+    method tieneCombustible() = gangster.even()
     method consumirCombustible() {
-        combustible combustible - consumoPorViaje
+        gangster = gangster - 1
     }
+    method patenteValida() = self.rapido()
+}
 
-    method cambiarGangster(numero) {
-        gangster = gangster + numero
+object chatarra {
+    var cañones = 10
+    var municiones = "ACME"
+    method rapido() = municiones.size() < cañones
+    method tieneCombustible() = municiones == "ACME" and cañones.between(6,12)
+    method consumirCombustible() {
+        cañones = (cañones / 2).roundUp(0)
+        if(cañones < 5)
+            municiones = municiones + "Obsoleto"
     }
+    method patenteValida() = municiones.take(4) == "ACME"
 }
 
 object superConvertible {
     var vehiculoConvertido = alambiqueVeloz
-    var rapido = vehiculoConvertido.rapido()
-    var combustible = vehiculoConvertido.combustible()
-    var consumoPorViaje = vehiculoConvertido.consumoPorViaje()
+    method rapido() = vehiculoConvertido.rapido()
+    method tieneCombustible() = vehiculoConvertido.tieneCombustible()
+    method consumirCombustible() = vehiculoConvertido.consumirCombustible()
 
-
-    method tieneCombustible() = combustible >= consumoPorViaje
-    method rapido() = rapido
-    method combustible() = combustible
-    method consumoPorViaje() = consumoPorViaje
-
-    method consumirCombustible() {
-        combustible -= consumoPorViaje
-    }
-
-    method cambiarVehiculoConvertido(nuevo) {
+    method convertir(nuevo) {
         vehiculoConvertido = nuevo
     }
+    method patenteValida() = vehiculoConvertido.patenteValida()
+}
+
+object moto{
+    method rapido() = true
+    method tieneCombustible() = not self.rapido()
+    method consumirCombustible() { }
+    method patenteValida() = false
 }
 
 
@@ -97,11 +102,5 @@ object lasVegas{
 
 object grecia{
     method recuerdoTipico() = "Ceramica"
-    method puedeLlegar(vehiculo) = vehiculo.rapido() && vehiculo.tieneCombustible()
-}
-
-object moto{
-    method rapido() = true
-    method tieneCombustible() = not self.rapido()
-    method consumirCombustible() { }
+    method puedeLlegar(vehiculo) = vehiculo.rapido() && vehiculo.tieneCombustible() && vehiculo.patenteValida()
 }
